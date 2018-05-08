@@ -1,4 +1,5 @@
 from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import render
@@ -9,7 +10,7 @@ from . import forms
 def dashboard(request):
     return render(request, 'users/dashboard.html')
 
-class LogoutView(FormView):
+class LogoutView(LoginRequiredMixin, FormView):
     form_class = forms.LogoutForm
     template_name = 'users/logout.html'
 

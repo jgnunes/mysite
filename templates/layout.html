@@ -36,6 +36,7 @@
             <li><a href="#">Sign up</a></li>
           {% else %}
             <li><a href="#">Gerar lista</a></li>
+          <li><a href="{% url 'users:logout' %}">Log out</a></li>
           {% endif %}
         </ul>
       </div><!--/.navbar-collapse -->
