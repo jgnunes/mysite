@@ -1,0 +1,11 @@
+{% load bootstrap3 %}
+
+
+<form method="POST" action = "#">
+    {% csrf_token %}
+    <div class="row">
+        <h2>O que você deseja estudar?</h2>
+        {% bootstrap_form form %}
+        {% buttons submit='Gerar Lista' %}{% endbuttons %}
+    </div>
+</form>

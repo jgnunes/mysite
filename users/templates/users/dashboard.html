@@ -1,11 +1,13 @@
 {% extends "layout.html" %}
 
+{% load lista_tags %}
+
 {% block title %}Dashboard | {{ block.super }}{% endblock %}
 
 {% block content %}
     <div id="content">
         <div class="container">
-            <h1>Dashboard</h1>
+            {% lista_form %}
         </div>
     </div>
 {% endblock %}

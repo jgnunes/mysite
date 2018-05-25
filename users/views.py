@@ -3,13 +3,25 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.urls import reverse, reverse_lazy
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import FormView, CreateView
-
+from django.views import generic
+from braces.views import SelectRelatedMixin
+from django.contrib.auth.models import User
 from . import forms
 
-def dashboard(request):
-    return render(request, 'users/dashboard.html')
+
+class Dashboard(
+    LoginRequiredMixin,
+    SelectRelatedMixin,
+    generic.DetailView
+):
+    model = User
+    select_related = ('thoughts',)
+    template_name = 'users/dashboard.html'
+
+    def get_object(self, queryset=None):
+        return self.request.user
 
 class LogoutView(LoginRequiredMixin, FormView):
     form_class = forms.LogoutForm
@@ -22,4 +34,7 @@ class LogoutView(LoginRequiredMixin, FormView):
 class SignUpView(CreateView):
     form_class = UserCreationForm
     template_name = 'users/signup.html'
-    success_url = reverse_lazy('users:dashboard')
+    success_url = reverse_lazy('users:login') #direciona de Signup para Login
+
+
+

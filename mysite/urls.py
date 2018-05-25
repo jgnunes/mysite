@@ -17,10 +17,12 @@ from django.contrib import admin
 from django.conf.urls import url, include
 from django.views.generic import TemplateView
 from users import urls as user_urls
+from listas import urls as lista_urls
 
 
 urlpatterns = [
     url('admin/', admin.site.urls),
+    url(r'^listas/', include(lista_urls, namespace='listas')),
     url(r'^users/', include(user_urls, namespace='users')),
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
 ]
