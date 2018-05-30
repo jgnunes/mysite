@@ -29,9 +29,10 @@ def criar_lista(request):
     for questao in questoes_queryset:
         respostas_queryset = Resposta.objects.filter(questao_id=questao.id)
         for resposta in respostas_queryset:
-            respostas.append(str(resposta))
+            respostas.append(str(resposta).replace('<p>', '').replace('</p>', '').replace("'", ""))
         # respostas.append(str(Resposta.objects.filter(questao_id=questao.id)))
-        questao = str(questao)
+        questao = str(questao).replace('<p>', '').replace("'", "")
+        questao = tuple(questao.split('</p>'))
         questoes[questao] = respostas
         respostas = []
 
