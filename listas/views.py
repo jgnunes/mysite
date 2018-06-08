@@ -27,15 +27,33 @@ def criar_lista(request):
     respostas = []
     assunto = request.session.get('requerir')[0]
     disciplina = request.session.get('requerir')[1]
-    questoes_queryset = Questao.objects.filter(tags__assunto__in=assunto, disciplinas__nome__in=disciplina)
-    for questao in questoes_queryset:
-        respostas_queryset = Resposta.objects.filter(questao_id=questao.id)
-        for resposta in respostas_queryset:
-            respostas.append(str(resposta).replace('<p>', '').replace('</p>', '').replace("'", ""))
-        # respostas.append(str(Resposta.objects.filter(questao_id=questao.id)))
-        questao = str(questao).replace('<p>', '').replace("'", "")
-        questao = tuple(questao.split('</p>'))
-        questoes[questao] = respostas
-        respostas = []
+    print("assunto", assunto)
+    print("disciplina", disciplina)
 
-    return render(request, 'listas/lista_criada.html', {'questoes': questoes})
+    #se nenhum assunto tiver sido selecionado, apenas disciplina(s)
+    #assunto nao sera usado para filtrar as questoes
+    if not assunto:
+        questoes_queryset = Questao.objects.filter(disciplinas__nome__in=disciplina)
+        for questao in questoes_queryset:
+            respostas_queryset = Resposta.objects.filter(questao_id=questao.id)
+            for resposta in respostas_queryset:
+                respostas.append(str(resposta).replace('<p>', '').replace('</p>', '').replace("'", ""))
+            questao = str(questao).replace('<p>', '').replace("'", "")
+            questao = tuple(questao.split('</p>'))
+            questoes[questao] = respostas
+            respostas = []
+
+        return render(request, 'listas/lista_criada.html', {'questoes': questoes})
+
+    else:
+        questoes_queryset = Questao.objects.filter(tags__assunto__in=assunto, disciplinas__nome__in=disciplina)
+        for questao in questoes_queryset:
+            respostas_queryset = Resposta.objects.filter(questao_id=questao.id)
+            for resposta in respostas_queryset:
+                respostas.append(str(resposta).replace('<p>', '').replace('</p>', '').replace("'", ""))
+            questao = str(questao).replace('<p>', '').replace("'", "")
+            questao = tuple(questao.split('</p>'))
+            questoes[questao] = respostas
+            respostas = []
+
+        return render(request, 'listas/lista_criada.html', {'questoes': questoes})

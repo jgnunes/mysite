@@ -8,7 +8,7 @@ class ListaForm(forms.Form):
     disciplina = forms.ModelMultipleChoiceField(queryset=disciplinas_objects)
 
     assuntos_objects = Tag.objects.all().order_by('assunto')
-    assunto = forms.ModelMultipleChoiceField(queryset=assuntos_objects)
+    assunto = forms.ModelMultipleChoiceField(queryset=assuntos_objects, required=False)
 
     def get_assunto(self):
         ''' returns the name of the selected language '''
