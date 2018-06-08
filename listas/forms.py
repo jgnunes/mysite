@@ -1,11 +1,14 @@
 from django import forms
 
 from . import models
-from . models import Tag
+from . models import Tag, Disciplina
 
 class ListaForm(forms.Form):
-    assuntos = Tag.objects.all().order_by('assunto')
-    opcoes = forms.ModelChoiceField(queryset=assuntos)
+    disciplinas_objects = Disciplina.objects.all().order_by('nome')
+    disciplina = forms.ModelMultipleChoiceField(queryset=disciplinas_objects)
+
+    assuntos_objects = Tag.objects.all().order_by('assunto')
+    assunto = forms.ModelMultipleChoiceField(queryset=assuntos_objects)
 
     def get_assunto(self):
         ''' returns the name of the selected language '''

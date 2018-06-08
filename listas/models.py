@@ -2,13 +2,6 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
 
-# class Lista(models.Model):
-#     user = models.ForeignKey(User, related_name='lista', on_delete = models.CASCADE, blank=True, null=True)
-#     generated_at = models.DateTimeField(default=timezone.now, editable=False)
-#
-#     def __str__(self):
-#         return '{}: {}'.format(self.generated_at, self.user)
-
 class Questao(models.Model):
     # lista = models.ForeignKey(Lista, related_name='listas', on_delete = models.CASCADE, blank=True, null=True)
     texto = models.CharField(max_length=500, default="")
@@ -31,6 +24,13 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.assunto
+
+class Disciplina(models.Model):
+    questao = models.ManyToManyField(Questao, related_name='disciplinas', default="", blank=True)
+    nome = models.CharField(max_length=500, default="")
+
+    def __str__(self):
+        return self.nome
 
 
 
