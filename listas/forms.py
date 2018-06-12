@@ -10,12 +10,11 @@ class ListaForm(forms.Form):
     assuntos_objects = Tag.objects.all().order_by('assunto')
     assunto = forms.ModelMultipleChoiceField(queryset=assuntos_objects, required=False)
 
-    def get_assunto(self):
-        ''' returns the name of the selected language '''
-        try:
-            return str(self.assuntos.get(assunto='biologia celular'))
-        except:
-            return 10
+    selecionar_tudo = forms.BooleanField(required=False)
+
+class GabaritoForm(forms.Form):
+    pass
+
 
 # class ListaForm(forms.ModelForm):
 #     class Meta:

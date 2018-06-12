@@ -4,7 +4,7 @@
 <form method="POST" action = "#">
     {% csrf_token %}
     <div class="container">
-        <h2>O que você deseja estudar?</h2>
+        <h2 align="center">O que você deseja estudar?</h2>
         {% bootstrap_form form %}
         {% buttons submit='Gerar Lista' %}{% endbuttons %}
     </div>
