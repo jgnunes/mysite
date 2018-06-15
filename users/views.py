@@ -28,8 +28,11 @@ class LogoutView(LoginRequiredMixin, FormView):
     template_name = 'users/logout.html'
 
     def form_valid(self, form):
-        logout(self.request)
-        return HttpResponseRedirect(reverse('home'))
+        if self.request.POST.get("nope"): #neste caso, o usuario mudou de ideia e nao fara logout
+            return HttpResponseRedirect(reverse('home'))
+        else:
+            logout(self.request) #neste caso, o usuario confirma o desejo de fazer logout
+            return HttpResponseRedirect(reverse('home'))
 
 class SignUpView(CreateView):
     form_class = UserCreationForm

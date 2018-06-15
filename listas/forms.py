@@ -12,7 +12,7 @@ class ListaForm(forms.Form):
     assunto = forms.ModelMultipleChoiceField(queryset=assuntos_objects, required=False)
 
     max_questoes = forms.IntegerField(label=u"Limite de questões",
-                                      help_text= u"Qual o máximo de questões que você deseja?",
+                                      help_text= u"O número máximo de questões que você deseja praticar",
                                       min_value=1)
 
     # selecionar_tudo = forms.BooleanField(required=False)

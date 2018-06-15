@@ -32,11 +32,11 @@
       <div id="navbar" class="navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
           {% if not user.is_authenticated %}
-            <li><a href="{% url 'users:login' %}">Login</a> </li>
-            <li><a href="{% url 'users:signup' %}">Sign up</a></li>
+            <li><a href="{% url 'users:login' %}">Entrar</a> </li>
+            <li><a href="{% url 'users:signup' %}">Cadastrar</a></li>
           {% else %}
-            <li><a href="{% url 'listas:requerir' %}">Gerar lista</a></li>
-          <li><a href="{% url 'users:logout' %}">Log out</a></li>
+            <li><a href="{% url 'listas:requerir' %}">Gerar Lista</a></li>
+          <li><a href="{% url 'users:logout' %}">Sair</a></li>
           {% endif %}
         </ul>
       </div><!--/.navbar-collapse -->
