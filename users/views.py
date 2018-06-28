@@ -35,7 +35,7 @@ class LogoutView(LoginRequiredMixin, FormView):
             return HttpResponseRedirect(reverse('home'))
 
 class SignUpView(CreateView):
-    form_class = UserCreationForm
+    form_class = forms.RegisterForm
     template_name = 'users/signup.html'
     success_url = reverse_lazy('users:login') #direciona de Signup para Login
 

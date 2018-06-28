@@ -47,7 +47,7 @@ def criar_lista(request):
     #se nenhum assunto tiver sido selecionado, apenas disciplina(s)
     #assunto nao sera usado para filtrar as questoes
     if not assunto:
-        # questoes_queryset = Questao.objects.filter(disciplinas__nome__in=disciplina)[:max_questoes]
+        questoes_queryset = Questao.objects.filter(disciplinas__nome__in=disciplina)[:max_questoes]
         for questao in questoes_queryset:
             respostas_queryset = Resposta.objects.filter(questao_id=questao.id)[:5]
             for resposta in respostas_queryset:
