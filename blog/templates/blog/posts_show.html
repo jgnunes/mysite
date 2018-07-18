@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+<style>
+#content {
+   margin-top: 80px;
+   margin-bottom: 40px;
+     }
+</style>
+
+<div id="content">
+        {% for key, value in posts.items %}
+                <h1>{{ key}} </h1>
+                {% for info in value %}
+                        {% if forloop.first %}
+                                <h4>Por: {{info}}</h4>
+                        {% else %}
+                                <h3>{{info}}</h3>
+                        {% endif %}
+                {% endfor %}
+        {% endfor %}
+</div>
+
+{% endblock %}

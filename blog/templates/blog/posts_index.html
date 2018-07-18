@@ -1,0 +1,19 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<style>
+#content {
+   margin-top: 80px;
+   margin-bottom: 40px;
+     }
+</style>
+
+<div id="content">
+    <h1 align="center">Aqui fazemos divulgação científica</h1>
+    {% for p in posts %}
+        <h2>{{p.titulo}}</h2>
+    {% endfor %}
+</div>
+
+{% endblock %}
