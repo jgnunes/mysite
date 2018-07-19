@@ -1,23 +1,40 @@
 {% extends "layout.html" %}
 {% block content %}
+
 <style>
-#content {
-   margin-top: 80px;
-   margin-bottom: 40px;
-     }
+#text_container {
+    margin: auto;
+    margin-top: 80px;
+    margin-bottom: 40px;
+    width: 70%;
+    padding: 10px 10px;
+    font-size: 20px;
+    padding-left: 120px;
+    text-align: justify;
+}
 </style>
 
-<div id="content">
-        {% for key, value in posts.items %}
+    <!-- Post Content -->
+    <article>
+      <div id="text_container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+              {% for key, value in posts.items %}
                 <h1>{{ key}} </h1>
                 {% for info in value %}
+
                         {% if forloop.first %}
                                 <h4>Por: {{info}}</h4>
                         {% else %}
-                                <h3>{{info}}</h3>
+                                {% for paragrafos in info %}
+                                    <p>{{paragrafos}}</p>
+                                {% endfor %}
                         {% endif %}
                 {% endfor %}
-        {% endfor %}
-</div>
+               {% endfor %}
+          </div>
+        </div>
+      </div>
+    </article>
 
 {% endblock %}
