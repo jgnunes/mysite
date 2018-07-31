@@ -12,8 +12,9 @@ def requerir_lista(request):
       if form.is_valid():
           assunto = [str(i) for i in form.cleaned_data.get('assunto', None)]
           disciplina = [str(j) for j in form.cleaned_data.get('disciplina', None)]
+          palavra_chave = [form.cleaned_data.get('palavra_chave', None)]
           max_questoes = form.cleaned_data.get('max_questoes', None)
-          request.session['requerir'] = request.POST.get('requerir', [assunto, disciplina, max_questoes])
+          request.session['requerir'] = request.POST.get('requerir', [assunto, disciplina, palavra_chave, max_questoes])
          #redirect to the url where you'll process the input
           return redirect('listas:criar') # insert reverse or url
    errors = form.errors or None # form not submitted or it has errors
@@ -28,13 +29,15 @@ def criar_lista(request):
     respostas_gabarito = []
     assunto = request.session.get('requerir')[0]
     disciplina = request.session.get('requerir')[1]
-    max_questoes = request.session.get('requerir')[2]
+    palavra_chave = request.session.get('requerir')[2]
+    print(palavra_chave)
+    max_questoes = request.session.get('requerir')[3]
 
     form = GabaritoForm(request.POST)
     if request.method == "POST":
         if form.is_valid():
             if not assunto:
-                questoes_queryset = Questao.objects.filter(disciplinas__nome__in=disciplina)[:max_questoes]
+                questoes_queryset = Questao.objects.filter(disciplinas__nome__in=disciplina, tags__assunto__in=palavra_chave)[:max_questoes]
             else:
                 questoes_queryset = Questao.objects.filter(tags__assunto__in=assunto, disciplinas__nome__in=disciplina)[:max_questoes]
             for questao in questoes_queryset:
@@ -47,7 +50,7 @@ def criar_lista(request):
     #se nenhum assunto tiver sido selecionado, apenas disciplina(s)
     #assunto nao sera usado para filtrar as questoes
     if not assunto:
-        questoes_queryset = Questao.objects.filter(disciplinas__nome__in=disciplina)[:max_questoes]
+        questoes_queryset = Questao.objects.filter(disciplinas__nome__in=disciplina, tags__assunto__in=palavra_chave)[:max_questoes]
         for questao in questoes_queryset:
             respostas_queryset = Resposta.objects.filter(questao_id=questao.id)[:5]
             for resposta in respostas_queryset:

@@ -19,11 +19,14 @@ from django.views.generic import TemplateView
 from users import urls as user_urls
 from listas import urls as lista_urls
 from blog import urls as blog_urls
+from . import views
 
 urlpatterns = [
     url('admin/', admin.site.urls),
     url(r'^listas/', include(lista_urls, namespace='listas')),
     url(r'^users/', include(user_urls, namespace='users')),
     url(r'^blog/', include(blog_urls, namespace='blog')),
-    url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
+    #url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
+    url(r'^$', views.home_page, name='home'),
 ]
+

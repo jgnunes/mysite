@@ -1,3 +1,4 @@
 python3
 	pip install -> django-bootstrap3
 	pip install -> django-braces
+	pip install -> Pillow
