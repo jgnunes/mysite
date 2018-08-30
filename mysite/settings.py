@@ -25,7 +25,7 @@ SECRET_KEY = 'nyxt-wt_&&r4*#ecz!9uzf&u)c6v20yo3z34u@r!8q^we^a9w&'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1', '192.168.1.7']
 
 
 # Application definition
