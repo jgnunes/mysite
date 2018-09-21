@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^listas/', include(lista_urls, namespace='listas')),
     url(r'^users/', include(user_urls, namespace='users')),
     url(r'^blog/', include(blog_urls, namespace='blog')),
-    #url(r'^$', TemplateView.as_view(template_name='index.html'), name='home'),
-    url(r'^$', views.home_page, name='home'),
+    url(r'^$', TemplateView.as_view(template_name='home.html'), name='home'),
+    #url(r'^$', views.home_page, name='home'),
 ]
 
